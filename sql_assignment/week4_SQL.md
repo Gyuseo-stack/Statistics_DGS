@@ -55,18 +55,21 @@
 ~~~
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
-대표적인 오류 카테고리
-syntax error
-문법을 지키지 않아 생기는 오류.
-에러 메세지를 보고 번역. 구글,챗지피티에 오류 메세지 물어보기
-데이터 예시나 쿼리를 제공하고, 오류가 발생한 것을 말해보기
+## 대표적인 오류와 해결 방법
 
-Number of arguments does not match for aggregate function count
+### 1. Syntax Error (문법 오류)
+- **설명**: SQL 문법을 지키지 않았을 때 발생하는 오류.
+- **대처법**: 에러 메시지를 번역하거나 구글·ChatGPT에 그대로 검색해 원인을 파악하고,
+  데이터 예시와 쿼리를 함께 점검한다.
+### 2. 집계 함수 인자 수 불일치
+- **오류 메시지**: Number of arguments does not match for aggregate function COUNT
 집계 함수 count의 인자 수가 일치하지 않는다
-SELECT list expression references column type1 a which is neither grouped nor aggregated
- select 목록 식은 다음에서 그룹화되거나 집계되지 않은 열을 참조
-group by에 적절한 컬럼을 명시하지 않았을 경우 발생하는 오류
-세미콜론을 안 붙히고 SELECT가 한 번 더 나오묜 오류가 나올 수 있음
+### 3. GROUP BY 누락 오류
+- **오류 메시지**: SELECT list expression references column type1 a which is neither grouped nor aggregated
+집계 함수 count의 인자 수가 일치하지 않는다
+COUNT(*) 같은 집계 함수와 같은 일반 컬럼을 함께 SELECT할 때,
+일반 컬럼을 GROUP BY에 포함하지 않으면 발생.
+-> 그룹 기준으로 묶을 컬럼을 GROUP BY에 명시.
 <img width="506" height="170" alt="image" src="https://github.com/user-attachments/assets/7ec9a3ab-ecba-47d0-b3c9-c40df4ddca93" />
 
 
@@ -80,15 +83,30 @@ group by에 적절한 컬럼을 명시하지 않았을 경우 발생하는 오�
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
 
-데이터 타입 종류: 숫자,문자, (시간,날짜), 부울(Bool) 이렇게 있음
-데이터 타입이 중요한 이유는 보이는 것과 저장된 것의 차이가 존재할 수 있음
-ex)액셀에서 보면 빈 갓ㅂ은 ''일 수도 있고 NULL일수도 있음
-   2023-12-31 같은 경우 DATE 2023 12 31일 수도 있고 문자 2023 12 31일 수도 있음
-내 생각과 다른 경우 데이터의 타입을 서로 변경해야 함
-자료 타입을 변경하는 함수는 cast
--> 더 안전하게 데이터 타입 변경하기 SAFE_CAST 
-SAFE_가 붙은 함수는 변환이 실패할 경우 NULL 반환
+## 데이터 타입의 종류
+- **숫자(Numeric)** : 정수형, 실수형 등 수치 연산이 가능한 데이터
+- **문자(String/Text)** : 문자, 문자열 데이터
+- **시간/날짜(Date/Time)** : 날짜(`DATE`), 시간(`TIME`), 타임스탬프(`TIMESTAMP`) 등
+- **부울(Boolean)** : 참(`TRUE`)/거짓(`FALSE`) 값을 갖는 데이터
 
+## 데이터 타입이 중요한 이유
+- 화면에 보이는 값과 실제로 **저장된 데이터 타입이 다를 수 있음**.
+- 예시
+  - 엑셀에서 빈 값은 `''`(빈 문자열)일 수도 있고 `NULL`일 수도 있음.
+  - `2023-12-31` 은 `DATE` 타입일 수도 있고, 단순 문자열 `"2023-12-31"`일 수도 있음.
+
+→ 데이터 분석이나 처리 과정에서 **의도한 타입으로 변환**해야 정확한 연산과 비교가 가능.
+
+## 데이터 타입 변환 방법
+- **CAST 함수**  CAST(값 AS 원하는_타입)
+  지정한 타입으로 변환 시도.
+- **SAFE_CAST 함수**  
+SAFE_CAST(값 AS 원하는_타입)
+변환이 실패할 경우 **오류 대신 `NULL`**을 반환하여 안전하게 변환.
+
+> `SAFE_` 가 붙은 함수는 변환 오류를 방지하고, 데이터 파이프라인의 안정성을 높여줌.
+
+---
 
 ## 4-3. 문자열 함수(CONCAT, SPLIT, REPLACE, TRIM, UPPER)
 
@@ -98,27 +116,36 @@ SAFE_가 붙은 함수는 변환이 실패할 경우 NULL 반환
 ~~~
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
-문자열 붙이기 -> CONCAT
-ex) SELECT
-      CONCAT("안녕","하세요","!")AS result
-->출력결과: 안녕하세요!
+## 문자열 관련 주요 함수와 예제
 
-문자열 분리하기 -> SPILT
-ex) SELECT
-      SPILT("가,나,다,라",",")AS result
--> ,를 기준으로 나눔 SPILT(문자열원본, 나눌 기준이 되는 문자)
+### 1. 문자열 붙이기 → **CONCAT**
+여러 문자열을 하나로 합칠 때 사용.
 
-특정 단어 수정하기 -> REPLACE
-ex) SELECT
-      REPLACE("안녕하세요","안녕","실천")AS result
-REPLACE(문자열 원본,찾을 단어,바꿀 단어)
+```sql
+SELECT CONCAT("안녕", "하세요", "!") AS result;
+```
+### 2. 문자열 분리하기 → SPLIT
+특정 구분자를 기준으로 문자열을 나눌 때 사용.
+```sql
+SELECT SPLIT("가,나,다,라", ",") AS result;
+```
+### 3.특정 단어 수정하기 → REPLACE
+문자열에서 특정 단어를 다른 단어로 치환.
+```sql
+SELECT REPLACE("안녕하세요", "안녕", "실천") AS result;
+```
 
-문자열 자르기 ->TRIM
-ex) SELECT
-      TRIM("안녕하세요","하세요")AS result
-TRIM(문자열 원본,자를 단어)
+### 4.문자열 자르기 → TRIM
+문자열 양쪽에서 특정 문자나 단어를 제거.
+```sql
+SELECT TRIM("안녕하세요", "하세요") AS result;
+```
 
-영어 소문자를 대문자로 변경->UPPER
+### 5.영어 소문자를 대문자로 변경 → UPPER
+영문 문자열을 모두 대문자로 변환.
+```sql
+SELECT UPPER("hello world") AS result;
+```
 
 ## 4-4. 날짜 및 시간 데이터 이해하기(1) (타임존, UTC, Millisecond, TIMESTAMP/DATETIME)
 
@@ -130,33 +157,42 @@ TRIM(문자열 원본,자를 단어)
 ~~~
 
 <!-- 새롭게 배운 내용을 자유롭게 정리해주세요.-->
-날짜 및 시간 데이터 타입 파악하기: DATE,DATETIME,TIMESTAMP
-날짜 및 시간 데이터 관련 알면 좋은 내용: UTC,Millisecond
-날짜 및 시간 데이터 타입 변환하기
-시간 함수(두 시간의 차이,특정 부분 추출하기)
-시간 데이터도 세부적으로 나눌 수 있음
-DATE DATE만 표시하는 데이터(2023-12-31)
-DATETIME: DATE와 TIME까지 표시하는 데이터, time zone 정보 없음(2023-12-31-14:00:00)
-TIMESTAMP: 날짜와 무관하게 시간만 표시하는 데디터(23:59:59.00)
+## 날짜 및 시간 데이터 정리
 
-타임존 이해하는 것이 중요
-UTC: 국제적인 표준 시간, 협정 세계시
-타임존이 존재한다=특정 지역의 표준 시간대(ex 한국 시간:UTC+9)
+### 날짜 및 시간 데이터 타입
+| 타입 | 특징 | 예시 |
+|------|------|------|
+| **DATE** | 날짜만 저장 | `2023-12-31` |
+| **DATETIME** | 날짜 + 시간 저장, **타임존 정보 없음** | `2023-12-31 14:00:00` |
+| **TIMESTAMP** | UTC(협정 세계시)를 기준으로 한 **시간 도장**, 타임존 정보 포함 | `2023-12-31 23:59:59.00` |
 
-TIMESTAMP: 시간 도장
-UTC부터 경관한 시간을 나타내는 값. time zone 정보 있음
+---
 
-Millisecond(1000분의 1초),빠른 반응이 필요한 분야에서 사용
-Millisecond => TIMESTAMP =>DATETIME으로 변경
+### 알아두면 좋은 개념
+- **UTC (Coordinated Universal Time)**  
+  국제 표준시로, 전 세계가 참조하는 기준 시간.  
+  - 예: 한국 표준시(KST)는 `UTC+9` (UTC 기준으로 9시간 빠름)
+  - 타임존이란 각 지역이 사용하는 표준 시간대를 의미.
 
-microsecond(1000분의 밀리세컨즈)
-많은 회사들의 Table에 시간이 TIMESTAMP로 저장된 경우가 많음(혹은 DATETIME)
-TIMESTAMP->DATETIME변환을 해야할 수 있음
+- **Millisecond**  
+  1초의 1/1000 단위 시간. 빠른 반응이나 정밀한 로그 기록 등에서 사용.
+
+- **Microsecond**  
+  1밀리초(1/1000초)의 1/1000 단위 시간.
+
+---
+
+### TIMESTAMP와 DATETIME 차이
+| 구분 | TIMESTAMP | DATETIME |
+|------|----------|---------|
+| **타임존** | UTC 기준으로 저장되며, 조회 시 설정된 로컬 타임존으로 변환 | 타임존 정보 없음 |
+| **표현** | UTC 기준 시간 값 | 지역 시간 값 |
+| **변환 필요성** | 글로벌 서비스에서는 TIMESTAMP를 주로 사용, 필요 시 DATETIME으로 변환 | 한국 시간 기준으로 그대로 표시 가능 |
+
 
 <img width="607" height="236" alt="image" src="https://github.com/user-attachments/assets/77c72b4b-dbce-4bfb-8e99-6020e1e14222" />
 
-TIMESTAMP: 타임존에 UTC가 나옴, 한국 시간-9시간
-DATETIME: T가 나옴,한국zone사용시 한국 시간과 동일
+
 
 
 
@@ -180,7 +216,7 @@ DATETIME: T가 나옴,한국zone사용시 한국 시간과 동일
 
 <!-- 문제를 풀기 위하여 로그인이  필요합니다. -->
 
-<!-- 정답을 맞추게 되면, 정답입니다. 라는 칸이 생성되는데 이 부분을 캡처해서 이 주석을 지우시고 첨부해주시면 됩니다. --> 
+<img width="631" height="319" alt="스크린샷 2025-09-28 오후 9 01 47" src="https://github.com/user-attachments/assets/41f49c60-51b1-4b50-b6c7-f000d37030be" />
 
 
 
@@ -210,7 +246,14 @@ WHERE AGE BETWEEN 20 AND 29
 
 
 ~~~
-여기에 답을 작성해주세요!
+1. `COUNT()` 집계 함수는 인수를 0개(`COUNT(*)`) 또는 1개(`COUNT(컬럼명)`)만 받을 수 있습니다.
+그런데 `COUNT(AGE, JOINED)`처럼 두 개 이상의 인수를 전달했기 때문에 오류가 발생
+
+2. `COUNT(*)`처럼 집계 함수와 `AGE`처럼 일반 컬럼을 함께 `SELECT`할 때는  
+일반 컬럼을 반드시 `GROUP BY` 절에 포함해야 함.
+하지만 현재 쿼리에는 `GROUP BY AGE`가 없어서
+“AGE가 집계되거나 그룹화되지 않았다”라고 에러 발생
+나이별 인원 수를 집계하려면 `GROUP BY AGE`를 추가해야 한다.
 ~~~
 
 
