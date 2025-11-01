@@ -252,6 +252,28 @@ WHEN total BETWEEN 300 AND 500 THEN "Medium"
 Else "Low"
 END AS total_grade
 From basic.pockemon
+
+
+
+Bigquery 공식 문서 확인하는 법
+
+개발 공식 문서는 해당 기술을 어떻게 사용하면 좋을 지에 대하여 참고하는 문서
+"기술명+documnetation"으로 검색
+문자열 함수 문법 찾는 버
+공식 문서에서 찾기(ctrl+f)를 통해 검색
+예제 쿼리도 같이 제공
+공식 문서 외에는 방대한 양에 압도될 수 있으며 과거의 문법이 존재 가능
+공식 문서를 기준점으로 잡는 것이 좋음
+BiqQuery xxxx라고 검색
+xxxx: 특정 행위
+I want to change string to in xxxx
+
+
+
+
+
+
+
 <br>
 
 
