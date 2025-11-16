@@ -54,7 +54,9 @@
 
 #### 비즈니스 도메인별 사용 가능 파생변수 예시
 <img width="486" height="266" alt="image" src="https://github.com/user-attachments/assets/c1e0f3c8-6e95-40b9-8c48-b527cef77298" />
+
 <img width="491" height="415" alt="image" src="https://github.com/user-attachments/assets/10eeb134-b0b2-4024-af68-68cb275b1a91" />
+
 <img width="476" height="316" alt="image" src="https://github.com/user-attachments/assets/e196616a-7ab5-48e9-90b8-d291804916fd" />
 
 파생변수는 기존의 변수를 활용해서 만들어낸 변수이기 때문에
@@ -238,8 +240,8 @@ math score, reading score, writing score 3가지 점수를 기준으로
 - 각 개념이 데이터 분석에서 어떻게 활용되었는지를 스스로 설명해보세요.
 - 단순한 코드 작성보다, 통계 개념 -> 코드 적용 -> 해석 -> 배운 점의 흐름을 명확히 드러내는 것이 핵심 기준입니다. 
 ~~~
-
-
+### 코랩 링크
+https://colab.research.google.com/drive/1896ZLs6VG0XDaIuzNLK3P4wh0tIubNwt?usp=sharing
 
 <!-- 이것으로 통계학 정규과제가 마무리 되었습니다.  자료실에서 보면 아시겠지만, 이번 통계학 정규과제는 2부까지만 진행을 하였습니다. 3부부터는 모델에 대한 개념이 등장하기 때문에, 수학적 통계학을 배우고 분석의 기초를 다지는 부분에 여러분이 더 집중할 수 있도록 구성했습니다. 또한 전체 분량이 길기 때문에 학습 부담을 줄이기 위한 결정입니다. 따라서 이번 주차를 끝으로 정규 과제는 마무리되지만, 머신러닝 모델에 대해 더 깊이 공부하고 싶은 분들은 3부를 개인적으로 학습해보는 것을 추천드립니다. 그동안 과제를 열심히 하느라 고생하셨습니다. -->
 
