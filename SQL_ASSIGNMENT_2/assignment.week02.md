@@ -75,13 +75,22 @@ WHERE ________;
 ```
 
 ```
-여기에 답을 적어주세요!
+1.mem_number == 4
+SQL에서는 같다라는 비교를 할 때 = 연산자를 사용
 ```
 
 
 ## 2. 좀 더 깊게 알아보는 SELECT문
 
 <!-- ORDER BY절과 GROUP BY절에 관해 배우게 된 점을 적어주세요. -->
+#### ORDER BY
+
+- **데이터 조회 결과를 정렬하는 절**
+- 기본 정렬 방식은 ASC(오름차순)이며, DESC(내림차순)으로도 정렬 가능
+
+#### GROUP BY
+- 같은 값을 가진 데이터들을 그룹으로 묶는 절
+- 주로 집계 함수(COUNT, SUM, AVG, MAX, MIN)와 함께 사용
 
 > **확인문제: 다음 표는 주요 집계함수를 정리한 것입니다. 각 설명에 해당하는 올바른 함수명을 기호에 맞게 작성하세요.**
 
@@ -96,16 +105,46 @@ WHERE ________;
 
 ```
 여기에 답을 적어주세요!
-(ㄱ) 
-(ㄴ) 
-(ㄷ) 
-(ㄹ) 
+(ㄱ) AVG()
+(ㄴ) MIN()
+(ㄷ) COUNT()
+(ㄹ) COUNT(DISTINCT)
 ```
 
 
 ## 3. 데이터 변경을 위한 SQL문
 
 <!-- INSERT문, UPDATE문, DELETE문에 관해 배우게 된 점을 적어주세요. -->
+
+#### INSERT
+
+- **테이블에 새로운 데이터를 추가하는 SQL 문**
+- 컬럼을 지정하거나 전체 컬럼 순서대로 값을 넣을 수 있음
+- **AUTO_INCREMENT**가 설정된 컬럼은 값을 입력하지 않아도 **자동으로 증가하는 값이 생성**
+
+~~~
+INSERT INTO member (mem_name, mem_number)
+VALUES ('블랙핑크', 4);
+~~~
+#### UPDATE
+기존 데이터를 수정하는 SQL 문
+보통 WHERE절과 함께 사용하여 특정 행만 수정
+**WHERE를 사용하지 않으면 테이블 전체 데이터가 수정**
+
+~~~
+UPDATE member
+SET mem_number = 5
+WHERE mem_name = '블랙핑크';
+~~~
+
+#### DELETE
+테이블의 데이터를 삭제하는 SQL 문
+WHERE절을 사용해 특정 데이터만 삭제 가능
+
+~~~
+DELETE FROM member
+WHERE mem_name = '블랙핑크';
+~~~
 
 > **확인문제: 다음이 설명하는 SQL이 무엇인지 쓰세요.**
 
@@ -116,7 +155,7 @@ WHERE ________;
 ```
 
 ```
-여기에 답을 적어주세요!
+TRUNCATE
 ```
 
 
@@ -167,6 +206,19 @@ INSERT INTO students VALUES
 4. 나이가 20 이상이고 GPA가 3.5 이상인 학생을 조회하시오.
 5. students 테이블에 본인의 정보를 직접 INSERT 하시오. (INSERT 실행 후, 데이터가 정상적으로 추가되었는지 확인할 수 있도록 조회 결과까지 포함하여 캡처하시오.)
 
-<!-- 이 부분을 지우고 인증사진을 제출해주세요.-->
+1
+<img width="520" height="458" alt="image" src="https://github.com/user-attachments/assets/1844093e-3827-405b-81e9-21a7c6139e7a" />
+
+2
+<img width="520" height="458" alt="image" src="https://github.com/user-attachments/assets/a6bfe8cd-1a9e-496e-8a12-1b7887241b09" />
+
+3
+<img width="520" height="458" alt="image" src="https://github.com/user-attachments/assets/839513a1-669e-49f6-9f3e-b0fbfc25abea" />
+
+4
+<img width="520" height="458" alt="image" src="https://github.com/user-attachments/assets/d3577076-1cab-4d32-b27e-3ded5156dd48" />
+
+5
+<img width="520" height="458" alt="image" src="https://github.com/user-attachments/assets/87908a0a-1fd0-4a05-a22f-b28af595b1bd" />
 
 ### 🎉 수고하셨습니다.
